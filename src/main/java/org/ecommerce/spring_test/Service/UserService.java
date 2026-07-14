@@ -71,5 +71,18 @@ public class UserService {
         }
     }
 
+    //delete user by userId
+    public String deleteUser(Integer userId){
+        try{
+            if(userRepository.existsById(userId)){
+                userRepository.deleteById(userId);
+                return "User with id " + userId + " deleted successfully.";
+            } else {
+                throw new UserNotFoundException("User not found with id: " + userId);
+            }
+        } catch (Exception e) {
+            throw new RuntimeException("Error while deleting user data" + e.getMessage());
+        }
+    }
 
 }
