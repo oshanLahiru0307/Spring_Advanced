@@ -9,6 +9,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class UserRequest {
 
-    private String Name;
-    private String Email;
+    private String name;
+    private String email;
 }

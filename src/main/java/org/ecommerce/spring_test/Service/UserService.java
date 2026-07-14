@@ -39,7 +39,7 @@ public class UserService {
                     .orElseThrow(()-> new UserNotFoundException("User not found with id: " + userId));
             return modelMapper.map(user, UserResponse.class);
         }catch(Exception e){
-            throw new UserNotFoundException("Error while fetching user data" + e.getMessage());
+            throw new UserNotFoundException("Error while fetching user data, " + e.getMessage());
         }
     }
 
@@ -53,7 +53,7 @@ public class UserService {
             User savedUser = userRepository.save(user);
             return modelMapper.map(savedUser, UserResponse.class);
         }catch(Exception e){
-            throw new RuntimeException("Error while saving user data" + e.getMessage());
+            throw new RuntimeException("Error while saving user data, " + e.getMessage());
         }
     }
 
