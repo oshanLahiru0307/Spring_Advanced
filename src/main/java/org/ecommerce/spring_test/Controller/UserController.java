@@ -1,13 +1,12 @@
 package org.ecommerce.spring_test.Controller;
 
+import org.ecommerce.spring_test.DTO.UserRequest;
 import org.ecommerce.spring_test.DTO.UserResponse;
 import org.ecommerce.spring_test.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,6 +28,20 @@ public class UserController {
     @GetMapping("/getUserById/{userId}")
     public ResponseEntity<UserResponse> getUserById(@PathVariable Integer userId){
         UserResponse response = userService.getUserByUserId(userId);
+        return ResponseEntity.ok(response);
+    }
+
+    //create new user
+    @PostMapping("/createUser")
+    public ResponseEntity<UserResponse> createUser(@RequestBody UserRequest userRequest){
+        UserResponse response = userService.saveUser(userRequest);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+
+    //update user by user id
+    @PutMapping("/updateUser/{userId}")
+    public ResponseEntity<UserResponse> updateUser(@PathVariable Integer userId, @RequestBody UserRequest userRequest){
+        UserResponse response = userService.updateUser(userId, userRequest);
         return ResponseEntity.ok(response);
     }
 
